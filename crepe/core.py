@@ -45,6 +45,12 @@ def build_and_load_model(model_capacity):
     from tensorflow.keras.layers import MaxPool2D, Dropout, Permute, Flatten, Dense
     from tensorflow.keras.models import Model
 
+    import tensorflow as tf
+
+    config = tf.compat.v1.ConfigProto()
+    config.gpu_options.allow_growth = True
+    tf.compat.v1.keras.backend.set_session(tf.compat.v1.Session(config=config))
+
     if models[model_capacity] is None:
         capacity_multiplier = {
             'tiny': 4, 'small': 8, 'medium': 16, 'large': 24, 'full': 32
